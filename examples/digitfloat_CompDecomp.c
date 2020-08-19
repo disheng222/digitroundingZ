@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 	}
 	size_t block_size = bshuf_default_block_size(nbEle);
 
-
+	SZ_Init(NULL);
 	//start compress: the entireu compression includes three steps: digit rounding + bit shuffle + zlib
 
 	//step 1: call digit rounding
