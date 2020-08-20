@@ -9,9 +9,49 @@
 #ifndef LIBDROUND_H_
 #define LIBDROUND_H_
 
+#include "defines.h"
+#include "callZlib.h"
+
 #define DIGIT_FLOAT    0
 #define DIGIT_DOUBLE   1
 
+typedef union lint16
+{
+        unsigned short usvalue;
+        short svalue;
+        unsigned char byte[2];
+} lint16;
+
+typedef union lint32
+{
+        int ivalue;
+        unsigned int uivalue;
+        unsigned char byte[4];
+} lint32;
+
+typedef union lint64
+{
+        long lvalue;
+        unsigned long ulvalue;
+        unsigned char byte[8];
+} lint64;
+
+typedef union ldouble
+{
+    double value;
+    unsigned long lvalue;
+    unsigned char byte[8];
+} ldouble;
+
+typedef union lfloat
+{
+    float value;
+    unsigned int ivalue;
+    unsigned char byte[4];
+} lfloat;
+
+extern int dataEndianType; //*endian type of the data read from disk
+extern int sysEndianType; //*sysEndianType is actually set automatically.
 
 /*
  * Round the float value keeping nsd significant digits. Fast computation method.

@@ -1,21 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <sz.h>
+#include <string.h>
+#include <libdround.h>
 #include <rw.h>
 #include <bitshuffle.h>
 #include "libdround.h"
-#include <stdlib.h>
 
 int main(int argc, char* argv[])
 {
-	size_t r5=0,r4=0,r3=0,r2=0,r1=0, i = 0;
-	char outDir[640], oriFilePath[640], outputFilePath[640];
+	char oriFilePath[640], cmpFile[640], outputFilePath[640];
  	int prec;
 
   	if(argc < 3)
   	{
-        printf("Test case: digitfloat_CompDecomp [data type] [precision] [srcFilePath] [dimension size]\n");
-        printf("Example: digitfloat_CompDecomp 1 testdata/x86/testfloat_8_8_128.dat 8192\n");
+        printf("Test case: digitfloat_CompDecomp [data type] [precision] [srcFilePath]\n");
+        printf("Example: digitfloat_CompDecomp -f 1 testdata/x86/testfloat_8_8_128.dat\n");
         exit(0);
   	}
 
@@ -23,40 +22,36 @@ int main(int argc, char* argv[])
   	prec = atoi(argv[2]);
 
   	sprintf(oriFilePath, "%s", argv[3]);
-	if(argc>=3)
-		r1 = atoi(argv[4]); //8
+	sprintf(cmpFile, "%s.dg", oriFilePath);
+	sprintf(outputFilePath, "%s.dg.out", oriFilePath);
 
 	size_t nbEle = 0;
 	int status = 0;
 	float* data = readFloatData(oriFilePath, &nbEle, &status);
-	if(nbEle != computeDataLength(r5,r4,r3,r2,r1))
-	{
-		printf("invalid size or dimension\n");
-		return 1;
-	}
-	size_t block_size = bshuf_default_block_size(nbEle);
-	for(i=0;i<10;i++)
-		printf("data[%d]=%f\n", i, data[i]);	
-	SZ_Init(NULL);
+	//for(i=0;i<10;i++)
+	//	printf("data[%d]=%f\n", i, data[i]);	
 	//start compress: the entireu compression includes three steps: digit rounding + bit shuffle + zlib
 	unsigned long outSize = 0;
-	float* out = NULL;
+	void* out = NULL;
 	if(strcmp(type, "-f")==0)
 	{
-		unsigned char* compressBytes = dround_compress(DIGIT_FLOAT, data, nbEle, prec, &outSize);
-		out = dround_decompress(DIGIT_FLOAT, compressBytes, nbEle, outSize);
-		out = (float*)out;
+		unsigned char* compressBytes = dround_compress(DROUND_FLOAT, data, nbEle, prec, &outSize);
+		writeByteData(compressBytes, outSize, cmpFile, &status);
+		out = dround_decompress(DROUND_FLOAT, compressBytes, nbEle, outSize);
+		writeFloatData_inBytes(out, nbEle, outputFilePath, &status);
 	}
 	else if(strcmp(type, "-d")==0)
 	{
-		unsigned char* compressBytes = dround_compress(DIGIT_DOUBLE, data, nbEle, prec, &outSize);
-		out = dround_decompress(DIGIT_DOUBLE, compressBytes, nbEle, outSize);
-		out = (double*)out;
+		unsigned char* compressBytes = dround_compress(DROUND_DOUBLE, data, nbEle, prec, &outSize);
+		writeByteData(compressBytes, outSize, cmpFile, &status);
+		out = dround_decompress(DROUND_DOUBLE, compressBytes, nbEle, outSize);
+		writeDoubleData_inBytes(out, nbEle, outputFilePath, &status);
 	}
-	
 
-	for(i=0;i<10;i++)
-		printf("out[%d]=%f\n", i, out[i]);	
+
+	
+	//for(i=0;i<10;i++)
+	//	printf("out[%d]=%f\n", i, out[i]);	
 	// //free memory
 	free(data);
 	free(out);

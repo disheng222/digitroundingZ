@@ -9,6 +9,7 @@
 #include <stdint.h>
 #include <math.h>
 #include "libdround.h"
+#include "bitshuffle.h"
 #include <stdlib.h>
 
 
@@ -16,6 +17,9 @@
 #define LOG10_2		   0.301029996		// log10(2)
 
 #define SIGN(x)		( (x<0) ? -1 : 1 )
+
+int dataEndianType; //*endian type of the data read from disk
+int sysEndianType; //*sysEndianType is actually set automatically.
 
 const float TABLE[5][2] = {
   {0.6, -LOG10_2},
@@ -96,8 +100,8 @@ unsigned char* dround_compress(int DATA_TYPE, void* data, size_t nbEle, int prec
 		dround_on_flt((void**)&data, nbEle*sizeof(float), prec);
 	
 		//step 2: call bit shuffle
-		char* bitshuffle_compressed = (char*)malloc(nbEle*sizeof(float));
-		bshuf_bitshuffle((char*)data, bitshuffle_compressed, nbEle, sizeof(float), block_size);
+		unsigned char* bitshuffle_compressed = (unsigned char*)malloc(nbEle*sizeof(float));
+		bshuf_bitshuffle((unsigned char*)data, bitshuffle_compressed, nbEle, sizeof(float), block_size);
 
 		//step 3: call zlib (i.e., deflate)
 		unsigned char* compressBytes = (unsigned char*)malloc(nbEle*sizeof(float));
@@ -111,8 +115,8 @@ unsigned char* dround_compress(int DATA_TYPE, void* data, size_t nbEle, int prec
 		dround_on_flt((void**)&data, nbEle*sizeof(double), prec);
 	
 		//step 2: call bit shuffle
-		char* bitshuffle_compressed = (char*)malloc(nbEle*sizeof(double));
-		bshuf_bitshuffle((char*)data, bitshuffle_compressed, nbEle, sizeof(double), block_size);
+		unsigned char* bitshuffle_compressed = (unsigned char*)malloc(nbEle*sizeof(double));
+		bshuf_bitshuffle((unsigned char*)data, bitshuffle_compressed, nbEle, sizeof(double), block_size);
 
 		//step 3: call zlib (i.e., deflate)
 		unsigned char* compressBytes = (unsigned char*)malloc(nbEle*sizeof(double));
@@ -134,7 +138,7 @@ void* dround_decompress(int DATA_TYPE, unsigned char* bytes, size_t nbEle, unsig
 	if(DATA_TYPE == DIGIT_FLOAT)
 	{
 		//start decompress: just need to decompress by zlib + bit unshuffle
-		char* out = NULL;
+		unsigned char* out = NULL;
 
 		zlib_uncompress5(bytes, outSize, &out, nbEle*sizeof(float));
 
@@ -148,7 +152,7 @@ void* dround_decompress(int DATA_TYPE, unsigned char* bytes, size_t nbEle, unsig
 	else if(DATA_TYPE == DIGIT_DOUBLE)
 	{
 		//start decompress: just need to decompress by zlib + bit unshuffle
-		char* out = NULL;
+		unsigned char* out = NULL;
 
 		zlib_uncompress5(bytes, outSize, &out, nbEle*sizeof(double));
 
