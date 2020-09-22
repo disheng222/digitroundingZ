@@ -11,6 +11,7 @@
 #include "libdround.h"
 #include "bitshuffle.h"
 #include <stdlib.h>
+#include <string.h>
 
 
 #define LOG2_10		   3.321928095		// log2(10)
@@ -96,32 +97,39 @@ unsigned char* dround_compress(int DATA_TYPE, void* data, size_t nbEle, int prec
 	size_t block_size = bshuf_default_block_size(nbEle);
 	if(DATA_TYPE == DIGIT_FLOAT)
 	{
+		float* data_copy = (float*)malloc(sizeof(float)*nbEle);
+		memcpy(data_copy, data, sizeof(float)*nbEle);
 		//call digit rounding
-		dround_on_flt((void**)&data, nbEle*sizeof(float), prec);
+		dround_on_flt((void**)&data_copy, nbEle*sizeof(float), prec);
 	
 		//step 2: call bit shuffle
 		unsigned char* bitshuffle_compressed = (unsigned char*)malloc(nbEle*sizeof(float));
-		bshuf_bitshuffle((unsigned char*)data, bitshuffle_compressed, nbEle, sizeof(float), block_size);
+		bshuf_bitshuffle((unsigned char*)data_copy, bitshuffle_compressed, nbEle, sizeof(float), block_size);
 
 		//step 3: call zlib (i.e., deflate)
 		unsigned char* compressBytes = (unsigned char*)malloc(nbEle*sizeof(float));
 		*outSize = zlib_compress3((unsigned char*)bitshuffle_compressed, nbEle*sizeof(float), compressBytes, 3);
 		free(bitshuffle_compressed);
+		free(data_copy);
 		return compressBytes;
 	}
 	else if(DATA_TYPE == DIGIT_DOUBLE)
 	{
+		double* data_copy = (double*)malloc(sizeof(double)*nbEle);
+		memcpy(data_copy, data, sizeof(double)*nbEle);
+
 		//call digit rounding
-		dround_on_flt((void**)&data, nbEle*sizeof(double), prec);
+		dround_on_flt((void**)&data_copy, nbEle*sizeof(double), prec);
 	
 		//step 2: call bit shuffle
 		unsigned char* bitshuffle_compressed = (unsigned char*)malloc(nbEle*sizeof(double));
-		bshuf_bitshuffle((unsigned char*)data, bitshuffle_compressed, nbEle, sizeof(double), block_size);
+		bshuf_bitshuffle((unsigned char*)data_copy, bitshuffle_compressed, nbEle, sizeof(double), block_size);
 
 		//step 3: call zlib (i.e., deflate)
 		unsigned char* compressBytes = (unsigned char*)malloc(nbEle*sizeof(double));
 		*outSize = zlib_compress3((unsigned char*)bitshuffle_compressed, nbEle*sizeof(double), compressBytes, 3);
 		free(bitshuffle_compressed);
+		free(data_copy);
 		return compressBytes;
 	}
 	else
