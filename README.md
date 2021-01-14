@@ -28,8 +28,8 @@ To confirm the correctness of our implementation, the evaluation results based o
 
 *Field: CLDHGH_1_1800_3600*
 <figure class="image">
-  <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/CLDHGH_1_1800_3600.dat2.png">
   <figcaption>Figure 2: Visualization of CESM Climate data: CLDGHG field</figcaption>
+  <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/CLDHGH_1_1800_3600.dat2.png">
 </figure>
 
 |	| PSNR |	|	Max Relative Error	| |	Compressed Data Size	| |	Compression Ratio	| |
@@ -43,8 +43,8 @@ To confirm the correctness of our implementation, the evaluation results based o
 
 *Field: FLDSC_1_1800_3600*
 <figure class="image">
-  <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/FLDSC_1_1800_3600.dat2.png">
   <figcaption>Figure 3: Visualization of CESM Climate data: FLDSC field</figcaption>
+  <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/FLDSC_1_1800_3600.dat2.png">
 </figure>
 
 |	| PSNR |	|	Max Relative Error	| |	Compressed Data Size	| |	Compression Ratio	| |
@@ -58,8 +58,8 @@ To confirm the correctness of our implementation, the evaluation results based o
 
 *Field: PHIS_1_1800_3600*
 <figure class="image">
+  <figcaption>Figure 4: Visualization of CESM Climate data: PHIS field</figcaption>  
   <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/PHIS_1_1800_3600.dat2.png">
-  <figcaption>Figure 4: Visualization of CESM Climate data: PHIS field</figcaption>
 </figure>
 
 |	| PSNR |	|	Max Relative Error	| |	Compressed Data Size	| |	Compression Ratio	| |
