@@ -1,0 +1,9 @@
+includedir=@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_INCLUDEDIR@/dr
+libdir=@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@
+
+Name: Digit_Rounding
+Description: The Digit_Rounding Lossy Compressor
+Version: @Digit_Rounding_VERSION@
+URL: https://github.com/disheng222/digitroundingZ
+Cflags: -I${includedir}
+Libs: -L${libdir} -ldround

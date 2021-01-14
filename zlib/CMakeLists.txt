@@ -1,4 +1,4 @@
-add_library(ZLIB SHARED 
+add_library(zlib SHARED 
   ./gzclose.c
   ./uncompr.c
   ./trees.c
@@ -16,14 +16,15 @@ add_library(ZLIB SHARED
   ./deflate.c
   )
 
-target_include_directories(ZLIB
+target_include_directories(zlib
   PUBLIC 
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   )
 
-install(TARGETS ZLIB EXPORT ZLIBConfig
+install(TARGETS zlib ${thirdparty_export} EXPORT zlibConfig
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} ARCHIVE
   DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
+install (EXPORT zlibConfig DESTINATION share/zlib/cmake)
 install(FILES zlib.h zconf.h DESTINATION include)
-export(TARGETS ZLIB FILE ZLIBConfig.cmake)
+export(TARGETS zlib FILE zlibConfig.cmake)

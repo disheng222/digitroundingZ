@@ -48,6 +48,9 @@
 #ifndef IOCHAIN_H
 #define IOCHAIN_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include <stdlib.h>
 #ifdef _OPENMP
@@ -89,6 +92,10 @@ const void * ioc_get_in(ioc_chain *C, size_t *this_iter);
 void ioc_set_next_in(ioc_chain *C, size_t* this_iter, void* in_ptr);
 void * ioc_get_out(ioc_chain *C, size_t *this_iter);
 void ioc_set_next_out(ioc_chain *C, size_t *this_iter, void* out_ptr);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // IOCHAIN_H
 
