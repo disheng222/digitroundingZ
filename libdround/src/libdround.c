@@ -9,7 +9,6 @@
 #include <stdint.h>
 #include <math.h>
 #include "libdround.h"
-#include "bitshuffle.h"
 #include <stdlib.h>
 #include <string.h>
 

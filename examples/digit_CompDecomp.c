@@ -3,7 +3,6 @@
 #include <string.h>
 #include <libdround.h>
 #include <rw.h>
-#include <bitshuffle.h>
 #include "libdround.h"
 
 int main(int argc, char* argv[])
