@@ -12,7 +12,10 @@ To confirm the correctness of our implementation, the evaluation results based o
 <font size=5>The slight difference (around 1% in general) on compression ratio might be due to different lossless compressor we used: we are using Zlib while the orginal version is using Gzip embedded in HDF5. All other impelemntations should be exactly the same. <font/>
 
 Field: CLDLOW_1_1800_3600
-
+<figure class="image">
+  <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/CLDLOW_1_1800_3600.dat2.png">
+  <figcaption>Figure 1: Visualization of CESM Climate data: CLDLOW field</figcaption>
+</figure>
 |	| PSNR ||	Max Relative Error	||	Compressed Data Size	||	Compression Ratio	||
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | nsd | Original DR	| digitroundingZ |	Original DR	| digitroundingZ |	Original DR |	digitroundingZ |	Original DR |	digitroundingZ |
@@ -23,7 +26,10 @@ Field: CLDLOW_1_1800_3600
 | 6	| 130.850663| 130.850663 | 4E-06 | 4E-06	| 12805616| 	12942513	| 2.0243	| 2.003 |
 
 Field: CLDHGH_1_1800_3600
-
+<figure class="image">
+  <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/CLDHGH_1_1800_3600.dat2.png">
+  <figcaption>Figure 1: Visualization of CESM Climate data: CLDGHG field</figcaption>
+</figure>
 |	| PSNR |	|	Max Relative Error	| |	Compressed Data Size	| |	Compression Ratio	| |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | nsd | Original DR	| digitroundingZ |	Original DR	| digitroundingZ |	Original DR |	digitroundingZ |	Original DR |	digitroundingZ |
@@ -34,7 +40,10 @@ Field: CLDHGH_1_1800_3600
 | 6	| 131.537219	| 131.537219	| 4E-06	| 4E-06	| 13789233	| 13972567	| 1.88	| 1.86|
 
 Field: FLDSC_1_1800_3600
-
+<figure class="image">
+  <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/FLDSC_1_1800_3600.dat2.png">
+  <figcaption>Figure 1: Visualization of CESM Climate data: FLDSC field</figcaption>
+</figure>
 |	| PSNR |	|	Max Relative Error	| |	Compressed Data Size	| |	Compression Ratio	| |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | nsd | Original DR	| digitroundingZ |	Original DR	| digitroundingZ |	Original DR |	digitroundingZ |	Original DR |	digitroundingZ |
@@ -45,7 +54,10 @@ Field: FLDSC_1_1800_3600
 | 6	| 121.841095 | 121.841095	| 5E-06		| 5E-06		| 9212984		| 9437212		| 2.81		| 2.75	| 
 
 Field: PHIS_1_1800_3600
-
+<figure class="image">
+  <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/PHIS_1_1800_3600.dat2.png">
+  <figcaption>Figure 1: Visualization of CESM Climate data: PHIS field</figcaption>
+</figure>
 |	| PSNR |	|	Max Relative Error	| |	Compressed Data Size	| |	Compression Ratio	| |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | nsd | Original DR	| digitroundingZ |	Original DR	| digitroundingZ |	Original DR |	digitroundingZ |	Original DR |	digitroundingZ |
