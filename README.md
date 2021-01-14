@@ -16,6 +16,7 @@ Field: CLDLOW_1_1800_3600
   <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/CLDLOW_1_1800_3600.dat2.png">
   <figcaption>Figure 1: Visualization of CESM Climate data: CLDLOW field</figcaption>
 </figure>
+
 |	| PSNR ||	Max Relative Error	||	Compressed Data Size	||	Compression Ratio	||
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | nsd | Original DR	| digitroundingZ |	Original DR	| digitroundingZ |	Original DR |	digitroundingZ |	Original DR |	digitroundingZ |
@@ -30,6 +31,7 @@ Field: CLDHGH_1_1800_3600
   <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/CLDHGH_1_1800_3600.dat2.png">
   <figcaption>Figure 1: Visualization of CESM Climate data: CLDGHG field</figcaption>
 </figure>
+
 |	| PSNR |	|	Max Relative Error	| |	Compressed Data Size	| |	Compression Ratio	| |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | nsd | Original DR	| digitroundingZ |	Original DR	| digitroundingZ |	Original DR |	digitroundingZ |	Original DR |	digitroundingZ |
@@ -44,6 +46,7 @@ Field: FLDSC_1_1800_3600
   <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/FLDSC_1_1800_3600.dat2.png">
   <figcaption>Figure 1: Visualization of CESM Climate data: FLDSC field</figcaption>
 </figure>
+
 |	| PSNR |	|	Max Relative Error	| |	Compressed Data Size	| |	Compression Ratio	| |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | nsd | Original DR	| digitroundingZ |	Original DR	| digitroundingZ |	Original DR |	digitroundingZ |	Original DR |	digitroundingZ |
@@ -58,6 +61,7 @@ Field: PHIS_1_1800_3600
   <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/PHIS_1_1800_3600.dat2.png">
   <figcaption>Figure 1: Visualization of CESM Climate data: PHIS field</figcaption>
 </figure>
+
 |	| PSNR |	|	Max Relative Error	| |	Compressed Data Size	| |	Compression Ratio	| |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | nsd | Original DR	| digitroundingZ |	Original DR	| digitroundingZ |	Original DR |	digitroundingZ |	Original DR |	digitroundingZ |
