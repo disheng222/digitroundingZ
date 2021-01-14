@@ -11,7 +11,7 @@ To confirm the correctness of our implementation, the evaluation results based o
 
 <font size=5>The slight difference (around 1% in general) on compression ratio might be due to different lossless compressor we used: we are using Zlib while the orginal version is using Gzip embedded in HDF5. All other impelemntations should be exactly the same. <font/>
 
-Field: CLDLOW_1_1800_3600
+*Field: CLDLOW_1_1800_3600*
 <figure class="image">
   <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/CLDLOW_1_1800_3600.dat2.png">
   <figcaption>Figure 1: Visualization of CESM Climate data: CLDLOW field</figcaption>
@@ -26,10 +26,10 @@ Field: CLDLOW_1_1800_3600
 | 5	| 112.798155| 112.798155 | 4.3E-05 | 4.3E-05| 	10029522	| 10174900	| 2.585	| 2.55 |
 | 6	| 130.850663| 130.850663 | 4E-06 | 4E-06	| 12805616| 	12942513	| 2.0243	| 2.003 |
 
-Field: CLDHGH_1_1800_3600
+*Field: CLDHGH_1_1800_3600*
 <figure class="image">
   <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/CLDHGH_1_1800_3600.dat2.png">
-  <figcaption>Figure 1: Visualization of CESM Climate data: CLDGHG field</figcaption>
+  <figcaption>Figure 2: Visualization of CESM Climate data: CLDGHG field</figcaption>
 </figure>
 
 |	| PSNR |	|	Max Relative Error	| |	Compressed Data Size	| |	Compression Ratio	| |
@@ -41,10 +41,10 @@ Field: CLDHGH_1_1800_3600
 | 5	| 113.466171	| 113.466171	| 4.3E-05	| 4.3E-05	| 10734906	| 10926706	| 2.41	| 2.37|
 | 6	| 131.537219	| 131.537219	| 4E-06	| 4E-06	| 13789233	| 13972567	| 1.88	| 1.86|
 
-Field: FLDSC_1_1800_3600
+*Field: FLDSC_1_1800_3600*
 <figure class="image">
   <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/FLDSC_1_1800_3600.dat2.png">
-  <figcaption>Figure 1: Visualization of CESM Climate data: FLDSC field</figcaption>
+  <figcaption>Figure 3: Visualization of CESM Climate data: FLDSC field</figcaption>
 </figure>
 
 |	| PSNR |	|	Max Relative Error	| |	Compressed Data Size	| |	Compression Ratio	| |
@@ -56,10 +56,10 @@ Field: FLDSC_1_1800_3600
 | 5	| 103.785617 | 103.785617	| 3.8E-05	| 3.8E-05	| 6259030	| 6468341		| 4.14	| 	4.01	| 
 | 6	| 121.841095 | 121.841095	| 5E-06		| 5E-06		| 9212984		| 9437212		| 2.81		| 2.75	| 
 
-Field: PHIS_1_1800_3600
+*Field: PHIS_1_1800_3600*
 <figure class="image">
   <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/PHIS_1_1800_3600.dat2.png">
-  <figcaption>Figure 1: Visualization of CESM Climate data: PHIS field</figcaption>
+  <figcaption>Figure 4: Visualization of CESM Climate data: PHIS field</figcaption>
 </figure>
 
 |	| PSNR |	|	Max Relative Error	| |	Compressed Data Size	| |	Compression Ratio	| |
