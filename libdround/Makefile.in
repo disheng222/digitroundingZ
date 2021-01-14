@@ -134,10 +134,9 @@ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(includedir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libdround_la_LIBADD =
 am__dirstamp = $(am__leading_dot)dirstamp
-am_libdround_la_OBJECTS = src/libdround_la-bitshuffle_core.lo \
-	src/libdround_la-callZlib.lo src/libdround_la-iochain.lo \
-	src/libdround_la-libdround.lo src/libdround_la-rw.lo \
-	src/libdround_la-ByteToolkit.lo
+am_libdround_la_OBJECTS = src/libdround_la-callZlib.lo \
+	src/libdround_la-iochain.lo src/libdround_la-libdround.lo \
+	src/libdround_la-rw.lo src/libdround_la-ByteToolkit.lo
 libdround_la_OBJECTS = $(am_libdround_la_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -323,14 +322,14 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
-include_HEADERS = include/bitshuffle_core.h  include/bitshuffle.h  include/bitshuffle_internals.h  include/callZlib.h \
+include_HEADERS = include/callZlib.h \
 		 include/iochain.h  include/libdround.h  include/rw.h include/defines.h include/ByteToolkit.h
 
 lib_LTLIBRARIES = libdround.la
 libdround_la_CFLAGS = -I./include -I../zlib
 libdround_la_LDFLAGS = -version-info  0:1:0
 libdround_la_LIDADD = ../zlib/.libs/libzlib.a
-libdround_la_SOURCES = src/bitshuffle_core.c  src/callZlib.c  src/iochain.c  src/libdround.c  src/rw.c src/ByteToolkit.c
+libdround_la_SOURCES = src/callZlib.c  src/iochain.c  src/libdround.c  src/rw.c src/ByteToolkit.c
 libdround_la_LINK = $(AM_V_CC)$(LIBTOOL) --tag=CC --mode=link $(CCLD) $(libdround_la_CFLAGS) -O3 $(libdround_la_LDFLAGS) -o $(lib_LTLIBRARIES)
 all: all-am
 
@@ -406,8 +405,6 @@ src/$(am__dirstamp):
 src/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) src/$(DEPDIR)
 	@: > src/$(DEPDIR)/$(am__dirstamp)
-src/libdround_la-bitshuffle_core.lo: src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
 src/libdround_la-callZlib.lo: src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/libdround_la-iochain.lo: src/$(am__dirstamp) \
@@ -431,7 +428,6 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/libdround_la-ByteToolkit.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/libdround_la-bitshuffle_core.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/libdround_la-callZlib.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/libdround_la-iochain.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/libdround_la-libdround.Plo@am__quote@
@@ -460,13 +456,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
-
-src/libdround_la-bitshuffle_core.lo: src/bitshuffle_core.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libdround_la_CFLAGS) $(CFLAGS) -MT src/libdround_la-bitshuffle_core.lo -MD -MP -MF src/$(DEPDIR)/libdround_la-bitshuffle_core.Tpo -c -o src/libdround_la-bitshuffle_core.lo `test -f 'src/bitshuffle_core.c' || echo '$(srcdir)/'`src/bitshuffle_core.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/libdround_la-bitshuffle_core.Tpo src/$(DEPDIR)/libdround_la-bitshuffle_core.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/bitshuffle_core.c' object='src/libdround_la-bitshuffle_core.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libdround_la_CFLAGS) $(CFLAGS) -c -o src/libdround_la-bitshuffle_core.lo `test -f 'src/bitshuffle_core.c' || echo '$(srcdir)/'`src/bitshuffle_core.c
 
 src/libdround_la-callZlib.lo: src/callZlib.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libdround_la_CFLAGS) $(CFLAGS) -MT src/libdround_la-callZlib.lo -MD -MP -MF src/$(DEPDIR)/libdround_la-callZlib.Tpo -c -o src/libdround_la-callZlib.lo `test -f 'src/callZlib.c' || echo '$(srcdir)/'`src/callZlib.c

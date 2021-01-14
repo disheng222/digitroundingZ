@@ -92,9 +92,129 @@ void dround_on_dbl(void **buf, size_t nbytes, int nsd)
                 buf_dbl[i] = droundFast(buf_dbl[i], nsd);
 }
 
+
+void SHUF(unsigned char* data, unsigned char* shuf_compressed, size_t nbEle, int bytesoftype)
+{
+    void *dest = shuf_compressed;          /* Buffer to deposit [un]shuffled bytes into */
+    unsigned char *_src=NULL;   /* Alias for source buffer */
+    unsigned char *_dest=NULL;  /* Alias for destination buffer */
+    size_t numofelements = nbEle;       /* Number of elements in buffer */
+    size_t i;                   /* Local index variables */
+    size_t leftover;            /* Extra bytes at end of buffer */
+	size_t nbytes = nbEle*bytesoftype;
+	if(bytesoftype > 1 && numofelements > 1)
+	{
+		/* Compute the leftover bytes if there are any */
+		leftover = nbytes % bytesoftype;
+		/* Get the pointer to the destination buffer */
+		_dest =(unsigned char *)dest;
+
+		/* Output; shuffle */
+		for(i=0; i<bytesoftype; i++) {
+			_src=data+i;
+#define DUFF_GUTS                               \
+    *_dest++=*_src;                             \
+    _src+=bytesoftype;
+		{
+			size_t duffs_index; /* Counting index for Duff's device */
+
+			duffs_index = (numofelements + 7) / 8;
+			switch (numofelements % 8) {
+				default:
+					printf("This Should never be executed!\n");
+					break;
+				case 0:
+					do
+					  {
+						DUFF_GUTS
+				case 7:
+						DUFF_GUTS
+				case 6:
+						DUFF_GUTS
+				case 5:
+						DUFF_GUTS
+				case 4:
+						DUFF_GUTS
+				case 3:
+						DUFF_GUTS
+				case 2:
+						DUFF_GUTS
+				case 1:
+						DUFF_GUTS
+				  } while (--duffs_index > 0);
+			} /* end switch */
+		}
+#undef DUFF_GUTS		
+		}//end for	
+		if(leftover>0) {
+			/* Adjust back to end of shuffled bytes */
+			_src -= (bytesoftype - 1);      /*lint !e794 _src is initialized */
+			memcpy(_dest, _src, leftover);
+		}
+	}
+}
+
+void reverseSHUF(unsigned char* bytes, unsigned char* shuf_decompressed, size_t nbEle, int bytesoftype)
+{
+    void *dest = shuf_decompressed;          /* Buffer to deposit [un]shuffled bytes into */
+    unsigned char *_src=bytes;   /* Alias for source buffer */
+    unsigned char *_dest=NULL;  /* Alias for destination buffer */
+    size_t numofelements = nbEle;       /* Number of elements in buffer */
+    size_t i;                   /* Local index variables */
+    size_t leftover;            /* Extra bytes at end of buffer */
+	size_t nbytes = nbEle*bytesoftype;
+	if(bytesoftype > 1 && numofelements > 1)
+	{
+		/* Compute the leftover bytes if there are any */
+		leftover = nbytes % bytesoftype;
+		for(i=0; i<bytesoftype; i++) {
+			_dest = ((unsigned char *)dest)+i;
+#define DUFF_GUTS                                                      \
+    *_dest=*_src++;                                                    \
+    _dest+=bytesoftype;
+		{
+			size_t duffs_index; /* Counting index for Duff's device */
+
+			duffs_index = (numofelements + 7) / 8;
+			switch (numofelements % 8) {
+				default:
+					printf("This Should never be executed!\n");
+					break;
+				case 0:
+					do
+					  {
+						DUFF_GUTS
+				case 7:
+						DUFF_GUTS
+				case 6:
+						DUFF_GUTS
+				case 5:
+						DUFF_GUTS
+				case 4:
+						DUFF_GUTS
+				case 3:
+						DUFF_GUTS
+				case 2:
+						DUFF_GUTS
+				case 1:
+						DUFF_GUTS
+				  } while (--duffs_index > 0);
+			} /* end switch */
+		}
+#undef DUFF_GUTS    
+		} //end for
+		/* Add leftover to the end of data */
+		if(leftover>0) {
+			/* Adjust back to end of shuffled bytes */
+			_dest -= (bytesoftype - 1);     /*lint !e794 _dest is initialized */
+			memcpy(_dest, _src, leftover);
+		}	
+	}
+}
+
+
 unsigned char* dround_compress(int DATA_TYPE, void* data, size_t nbEle, int prec, unsigned long* outSize)
 {
-	size_t block_size = bshuf_default_block_size(nbEle);
 	if(DATA_TYPE == DIGIT_FLOAT)
 	{
 		float* data_copy = (float*)malloc(sizeof(float)*nbEle);
@@ -104,7 +224,7 @@ unsigned char* dround_compress(int DATA_TYPE, void* data, size_t nbEle, int prec
 	
 		//step 2: call bit shuffle
 		unsigned char* bitshuffle_compressed = (unsigned char*)malloc(nbEle*sizeof(float));
-		bshuf_bitshuffle((unsigned char*)data_copy, bitshuffle_compressed, nbEle, sizeof(float), block_size);
+		SHUF((unsigned char*)data_copy, bitshuffle_compressed, nbEle, sizeof(float));
 
 		//step 3: call zlib (i.e., deflate)
 		unsigned char* compressBytes = (unsigned char*)malloc(nbEle*sizeof(float));
@@ -123,7 +243,7 @@ unsigned char* dround_compress(int DATA_TYPE, void* data, size_t nbEle, int prec
 	
 		//step 2: call bit shuffle
 		unsigned char* bitshuffle_compressed = (unsigned char*)malloc(nbEle*sizeof(double));
-		bshuf_bitshuffle((unsigned char*)data_copy, bitshuffle_compressed, nbEle, sizeof(double), block_size);
+		SHUF((unsigned char*)data_copy, bitshuffle_compressed, nbEle, sizeof(double));
 
 		//step 3: call zlib (i.e., deflate)
 		unsigned char* compressBytes = (unsigned char*)malloc(nbEle*sizeof(double));
@@ -142,7 +262,6 @@ unsigned char* dround_compress(int DATA_TYPE, void* data, size_t nbEle, int prec
 //DATA_TYPE == 0 means float, ==1 means double
 void* dround_decompress(int DATA_TYPE, unsigned char* bytes, size_t nbEle, unsigned long outSize)
 {
-	size_t block_size = bshuf_default_block_size(nbEle);
 	if(DATA_TYPE == DIGIT_FLOAT)
 	{
 		//start decompress: just need to decompress by zlib + bit unshuffle
@@ -152,8 +271,7 @@ void* dround_decompress(int DATA_TYPE, unsigned char* bytes, size_t nbEle, unsig
 
 		//TODO: call bit unshuffle --> unsigned char* out2
 		float* bitshuffle_decompressed = (float*)malloc(nbEle*sizeof(float));
-		bshuf_bitunshuffle(out, bitshuffle_decompressed, nbEle, sizeof(float),
-                    block_size);
+		reverseSHUF(out, (unsigned char*)bitshuffle_decompressed, nbEle, sizeof(float));
 
 		return bitshuffle_decompressed;
 	}
@@ -166,8 +284,7 @@ void* dround_decompress(int DATA_TYPE, unsigned char* bytes, size_t nbEle, unsig
 
 		//TODO: call bit unshuffle --> unsigned char* out2
 		double* bitshuffle_decompressed = (double*)malloc(nbEle*sizeof(double));
-		bshuf_bitunshuffle(out, bitshuffle_decompressed, nbEle, sizeof(double),
-                    block_size);
+		reverseSHUF(out, (unsigned char*)bitshuffle_decompressed, nbEle, sizeof(double));
 
 		return bitshuffle_decompressed;
 	}
