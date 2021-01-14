@@ -13,7 +13,7 @@ To confirm the correctness of our implementation, the evaluation results based o
 
 Field: CLDLOW_1_1800_3600
 
-|	| PSNR |	|	Max Relative Error	| |	Compressed Data Size	| |	Compression Ratio	| |
+|	| PSNR ||	Max Relative Error	||	Compressed Data Size	||	Compression Ratio	||
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | nsd | Original DR	| digitroundingZ |	Original DR	| digitroundingZ |	Original DR |	digitroundingZ |	Original DR |	digitroundingZ |
 | 2 |	52.587367	| 52.587367	| 0.041659 | 0.041659 | 2057702	| 2084242	| 12.6	| 12.44 |
