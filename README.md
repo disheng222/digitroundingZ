@@ -13,8 +13,8 @@ To confirm the correctness of our implementation, the evaluation results based o
 
 *Field: CLDLOW_1_1800_3600*
 <figure class="image">
-  <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/CLDLOW_1_1800_3600.dat2.png">
   <figcaption>Figure 1: Visualization of CESM Climate data: CLDLOW field</figcaption>
+  <img align="center" width="360" src="https://www.mcs.anl.gov/~shdi/download/digitroundingZ/CLDLOW_1_1800_3600.dat2.png">
 </figure>
 
 |	| PSNR ||	Max Relative Error	||	Compressed Data Size	||	Compression Ratio	||
