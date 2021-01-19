@@ -1,5 +1,4 @@
 add_library (dround
-  src/bitshuffle_core.c  
   src/ByteToolkit.c  
   src/callZlib.c  
   src/iochain.c  
